@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+      body { width: 330px; margin: 0; padding: 14px; background: #0b1220; color: #e5e7eb; font-size: 13px; }
+      h1 { font-size: 15px; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
+      .dot { width: 9px; height: 9px; border-radius: 50%; background: #6b7280; display: inline-block; }
+      .dot.ok { background: #22c55e; } .dot.bad { background: #ef4444; }
+      .hint { color: #9ca3af; font-size: 12px; }
+      label { display: block; margin: 12px 0 5px; color: #9ca3af; font-size: 12px; }
+      select, input[type=range] { width: 100%; }
+      select { padding: 7px; border-radius: 8px; background: #111827; color: #e5e7eb; border: 1px solid #374151; }
+      input[type=range] { accent-color: #14b8a6; }
+      .row { display: flex; gap: 8px; align-items: center; }
+      .row.between { justify-content: space-between; }
+      .presets { display: flex; gap: 6px; margin-top: 6px; }
+      .presets button { flex: 1; padding: 4px 0; font-size: 12px; background: #111827; color: #d1d5db; border: 1px solid #374151; border-radius: 6px; cursor: pointer; }
+      .presets button:hover { background: #1f2937; }
+      .actions { display: flex; gap: 8px; margin-top: 14px; }
+      button.primary { flex: 1; padding: 9px; border: 0; border-radius: 9px; background: #0f766e; color: white; font-weight: 600; cursor: pointer; font-size: 13px; }
+      button.primary:hover { background: #0d9488; }
+      button.sec { padding: 9px 12px; border: 0; border-radius: 9px; background: #1f2937; color: #e5e7eb; cursor: pointer; font-size: 13px; }
+      button.sec:hover { background: #374151; }
+      .status { margin-top: 12px; min-height: 18px; color: #9ca3af; font-size: 12px; }
+      .status.err { color: #fca5a5; }
+      a { color: #5eead4; cursor: pointer; text-decoration: none; } a:hover { text-decoration: underline; }
+      .val { font-variant-numeric: tabular-nums; color: #e5e7eb; }
+      .panel { margin-top: 14px; padding-top: 10px; border-top: 1px solid #1f2937; }
+      .panel h2 { margin: 0 0 6px; font-size: 12px; font-weight: 600; color: #9ca3af; }
+      .check { display: flex; gap: 8px; align-items: center; margin: 8px 0; color: #e5e7eb; cursor: pointer; }
+      .check input { accent-color: #14b8a6; margin: 0; }
+    </style>
+  </head>
+  <body>
+    <h1><span class="dot" id="dot"></span> Murmur <span class="hint" id="srv" style="margin-left:auto"></span></h1>
+
+    <label for="voice">Voice</label>
+    <select id="voice"></select>
+
+    <label><span class="row between"><span>Speed</span><span class="val" id="speedVal">1.0×</span></span></label>
+    <input type="range" id="speed" min="0.5" max="3" step="0.05" value="1" />
+    <div class="presets">
+      <button data-s="0.75">0.75×</button><button data-s="1">1×</button>
+      <button data-s="1.25">1.25×</button><button data-s="1.5">1.5×</button><button data-s="2">2×</button>
+    </div>
+
+    <label><span class="row between"><span>Volume</span><span class="val" id="volVal">100%</span></span></label>
+    <input type="range" id="volume" min="0" max="1" step="0.05" value="1" />
+
+    <div class="actions">
+      <button class="primary" id="read">🔊 Read selection</button>
+      <button class="sec" id="pause" title="Pause / resume">⏯</button>
+      <button class="sec" id="stop" title="Stop">⏹</button>
+    </div>
+    <div class="panel">
+      <h2>On the page</h2>
+      <label class="check"><input type="checkbox" id="speakOnParagraphs" /> Display Read on paragraphs</label>
+      <label class="check"><input type="checkbox" id="speakOnPage" /> Display Read on page</label>
+    </div>
+    <div class="status" id="status"></div>
+    <div class="hint" style="margin-top:10px">
+      Tip: select text and press <b>Alt+R</b> · <a id="opts">Settings</a>
+    </div>
+
+    <script src="tts-client.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

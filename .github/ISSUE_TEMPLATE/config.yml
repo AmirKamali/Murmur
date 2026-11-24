@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Hugging Face model
+    url: https://huggingface.co/amir-n3t/Kokoro-tts-82M
+    about: Weights and license for the Kokoro-82M voice model Murmur plays.

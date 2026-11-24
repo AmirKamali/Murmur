@@ -1,0 +1,25 @@
+# macOS / editor
+.DS_Store
+.AppleDouble
+.idea/
+.vscode/
+*.swp
+
+# The engine is cloned on first launch (see server/start-kokoro.sh).
+# It contains a third-party checkout, a virtualenv, and model weights.
+server/kokoro/
+
+# Python and model artifacts, wherever they land
+.venv/
+__pycache__/
+*.py[cod]
+*.pth
+*.onnx
+*.bin
+*.safetensors
+
+# Logs and local env
+*.log
+.env
+.env.*
+!.env.example

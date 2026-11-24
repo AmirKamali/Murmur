@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Murmur – Settings</title>
+    <style>
+      * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+      body { margin: 0; background: #0b1220; color: #e5e7eb; font-size: 14px; }
+      main { max-width: 760px; margin: 0 auto; padding: 28px 20px 60px; }
+      h1 { font-size: 22px; margin: 0 0 4px; } h2 { font-size: 16px; margin: 0 0 12px; }
+      .sub { color: #9ca3af; margin-bottom: 22px; }
+      section { background: #111827; border: 1px solid #1f2937; border-radius: 14px; padding: 18px; margin-bottom: 18px; }
+      label { display: block; margin: 12px 0 5px; color: #9ca3af; font-size: 12px; }
+      input[type=url], select { width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid #374151; background: #0b1220; color: #e5e7eb; font-size: 14px; }
+      input[type=range] { width: 100%; accent-color: #14b8a6; }
+      .check { display: flex; gap: 8px; align-items: center; margin: 10px 0; color: #e5e7eb; font-size: 14px; }
+      button { padding: 8px 14px; border: 0; border-radius: 8px; background: #1f2937; color: #e5e7eb; cursor: pointer; font-size: 13px; }
+      button:hover { background: #374151; } button.p { background: #0f766e; color: #fff; font-weight: 600; } button.p:hover { background: #0d9488; }
+      button:disabled { opacity: .5; cursor: default; }
+      .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+      .msg { margin-top: 10px; min-height: 18px; color: #9ca3af; font-size: 13px; } .msg.err { color: #fca5a5; } .msg.ok { color: #86efac; }
+      .dot { width: 9px; height: 9px; border-radius: 50%; background: #6b7280; display: inline-block; margin-right: 6px; }
+      .dot.ok { background: #22c55e; } .dot.bad { background: #ef4444; }
+      .val { float: right; color: #e5e7eb; font-variant-numeric: tabular-nums; }
+      code { background: #0b1220; padding: 2px 6px; border-radius: 5px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Murmur</h1>
+      <div class="sub">Highlight text on any page and hear it from a local Kokoro voice. Nothing leaves your machine.</div>
+
+      <section>
+        <h2>Server</h2>
+        <label for="serverUrl">Kokoro server URL</label>
+        <input type="url" id="serverUrl" />
+        <div class="row" style="margin-top:10px">
+          <button id="test">Test connection</button>
+          <span id="health" class="msg" style="margin:0"></span>
+        </div>
+        <div class="msg" id="startHint"></div>
+      </section>
+
+      <section>
+        <h2>Voice</h2>
+        <label for="voice">Default voice</label>
+        <select id="voice"></select>
+        <div class="row" style="margin-top:10px"><button class="p" id="preview">▶ Preview selected voice</button></div>
+        <div class="msg" id="voiceMsg"></div>
+      </section>
+
+      <section>
+        <h2>Playback</h2>
+        <label>Default speed <span class="val" id="speedVal"></span></label>
+        <input type="range" id="speed" min="0.5" max="3" step="0.05" />
+        <div class="check"><input type="checkbox" id="smooth" /> <label for="smooth" style="margin:0;color:#e5e7eb;font-size:14px">Smooth playback: briefly buffer before starting long passages so they don't pause between sentences</label></div>
+        <div class="check"><input type="checkbox" id="speakOnParagraphs" /> <label for="speakOnParagraphs" style="margin:0;color:#e5e7eb;font-size:14px">Display Read on paragraphs</label></div>
+        <div class="check"><input type="checkbox" id="speakOnPage" /> <label for="speakOnPage" style="margin:0;color:#e5e7eb;font-size:14px">Display Read on page</label></div>
+        <div class="check"><input type="checkbox" id="showButton" /> <label for="showButton" style="margin:0;color:#e5e7eb;font-size:14px">Show a “Read” button when I highlight text</label></div>
+        <div class="check"><input type="checkbox" id="autoRead" /> <label for="autoRead" style="margin:0;color:#e5e7eb;font-size:14px">Start reading immediately when I highlight text</label></div>
+        <div class="msg">Shortcuts: <code>Alt+R</code> read selection, <code>Alt+P</code> pause/resume, <code>Alt+S</code> stop. Change them at <code>chrome://extensions/shortcuts</code>.</div>
+      </section>
+    </main>
+    <script src="tts-client.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>

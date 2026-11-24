@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Murmur</title>
+    <meta
+      name="description"
+      content="Highlight text on any page and hear it from a local Kokoro-82M voice."
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0b1220;
+        --card: #111827;
+        --line: #1f2937;
+        --text: #e5e7eb;
+        --muted: #9ca3af;
+        --teal: #5eead4;
+        --btn: #0f766e;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; background: var(--bg); color: var(--text); }
+      body {
+        font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+      main { max-width: 720px; margin: 0 auto; padding: 64px 22px 80px; }
+      .mark {
+        width: 10px; height: 10px; border-radius: 50%; background: #22c55e;
+        display: inline-block; margin-right: 8px; vertical-align: 1px;
+      }
+      h1 { font-size: 34px; line-height: 1.15; margin: 0 0 12px; letter-spacing: -0.02em; }
+      .lead { font-size: 18px; color: var(--muted); margin: 0 0 28px; }
+      .row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
+      a.btn, a.ghost {
+        display: inline-block; text-decoration: none; border-radius: 10px;
+        padding: 10px 14px; font-weight: 600; font-size: 14px;
+      }
+      a.btn { background: var(--btn); color: white; }
+      a.btn:hover { background: #0d9488; }
+      a.ghost { background: #1f2937; color: var(--text); }
+      a.ghost:hover { background: #374151; }
+      section {
+        background: var(--card); border: 1px solid var(--line);
+        border-radius: 14px; padding: 18px 18px 8px; margin: 0 0 14px;
+      }
+      h2 { font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
+      ol { margin: 0 0 12px; padding-left: 20px; }
+      li { margin: 0 0 8px; }
+      code, pre {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 13px;
+      }
+      code { background: var(--bg); padding: 1px 6px; border-radius: 5px; }
+      pre {
+        background: var(--bg); border-radius: 10px; padding: 12px 14px;
+        overflow-x: auto; margin: 0 0 14px;
+      }
+      a { color: var(--teal); }
+      footer { color: var(--muted); font-size: 13px; margin-top: 22px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1><span class="mark"></span>Murmur</h1>
+      <p class="lead">
+        Highlight text on any page and hear it from a Kokoro-82M voice running on this computer.
+      </p>
+      <div class="row">
+        <a class="btn" href="https://github.com/AmirKamali/Murmur">Source on GitHub</a>
+        <a class="ghost" href="https://huggingface.co/amir-n3t/Kokoro-tts-82M">Kokoro-82M weights</a>
+      </div>
+
+      <section>
+        <h2>Run it locally</h2>
+        <ol>
+          <li>Install Git and <a href="https://docs.astral.sh/uv/">uv</a>. macOS and Windows are supported; Linux is TBD.</li>
+          <li>
+            <pre>git clone https://github.com/AmirKamali/Murmur.git
+cd Murmur
+./server/start-murmur.sh          # macOS
+# .\server\start-murmur.ps1       # Windows PowerShell</pre>
+          </li>
+          <li>Open <code>chrome://extensions</code>, turn on Developer mode, and load the <code>extension/</code> folder.</li>
+          <li>Select text and press <code>Alt+R</code>. The popup lists voices and speed.</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>What stays here</h2>
+        <p>
+          The extension sends the passage to Kokoro-FastAPI on this machine
+          (<code>127.0.0.1:8880</code>). The server returns a WAV from
+          <a href="https://huggingface.co/amir-n3t/Kokoro-tts-82M">Kokoro-82M</a>.
+          The extension plays that audio.
+        </p>
+        <p>macOS uses the Apple GPU. Windows defaults to CPU unless you ask for NVIDIA:</p>
+        <pre>$env:DEVICE_TYPE = "cuda"      # NVIDIA
+$env:DEVICE_TYPE = "cuda128"   # RTX 50-series
+.\server\start-murmur.ps1</pre>
+      </section>
+
+      <footer>
+        Extension: MIT. Model and
+        <a href="https://github.com/remsky/Kokoro-FastAPI">Kokoro-FastAPI</a>: Apache-2.0.
+        Voices include English, Spanish, French, Hindi, Italian, Japanese, Portuguese, and Chinese.
+      </footer>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+Murmur
+Copyright (c) 2026 Murmur contributors
+
+The extension and launcher in this repository are under the MIT License
+(see LICENSE).
+
+Running the project downloads two separately licensed components. They are
+not vendored here:
+
+- Kokoro-FastAPI, Apache License 2.0
+  https://github.com/remsky/Kokoro-FastAPI
+  Copyright © the Kokoro-FastAPI authors
+
+- Kokoro-82M weights and voice packs, Apache License 2.0
+  https://huggingface.co/amir-n3t/Kokoro-tts-82M
+  Upstream: https://huggingface.co/hexgrad/Kokoro-82M
+  Copyright © hexgrad and the Kokoro authors
+
+The pinned Kokoro-FastAPI commit is recorded in server/start-murmur.sh and
+server/start-murmur.ps1.
